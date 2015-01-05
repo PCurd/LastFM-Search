@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IF.Lastfm.Core">
+      <HintPath>..\..\..\lastfm\src\IF.Lastfm.Core\bin\Debug\IF.Lastfm.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -52,6 +58,15 @@
   <ItemGroup>
     <Compile Include="Common_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LastFM-Search Library\LastFM-Search Library.csproj">
+      <Project>{d367b1b1-304d-40ab-8da5-5981834bbe47}</Project>
+      <Name>LastFM-Search Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
