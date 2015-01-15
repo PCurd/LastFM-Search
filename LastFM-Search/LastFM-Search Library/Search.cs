@@ -31,7 +31,7 @@ namespace LastFMSearch.LastFM_Search_Library
                 this.userApi = userApi;
         }
 
-        public async Task<List<LastAlbum>> PerformTopAlbumSearch(string username)
+        public async Task<IReadOnlyList<LastAlbum>> PerformTopAlbumSearch(string username)
         {
             var response = await userApi.GetTopAlbums(username, IF.Lastfm.Core.Api.Enums.LastStatsTimeSpan.Overall);
             return response.Content;

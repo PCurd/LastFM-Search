@@ -21,9 +21,8 @@ namespace LastFMSearch.LastFM_Search_Tests
         {
             Mock<IUserApi> mockUserApi = new Mock<IUserApi>();
 
-            var pageResponse = new PageResponse<LastAlbum>();
-
-            pageResponse.Content.Add(new LastAlbum() { Name = "bob" });
+            var newContent = new List<LastAlbum>() { new LastAlbum() { Name = "bob" } };
+            var pageResponse = new PageResponse<LastAlbum>(newContent);
 
             var returnValue = Task.Factory.StartNew( () => pageResponse);
 
@@ -38,10 +37,14 @@ namespace LastFMSearch.LastFM_Search_Tests
             Assert.AreEqual(1,1);
         }
 
-        public string ListToString<T>(List<T> LastFMObject, Func<T, string> action)
+        public string ListToString<T>(IReadOnlyList<T> LastFMObject, Func<T, string> action)
         {
             var sb = new System.Text.StringBuilder();
-            LastFMObject.ForEach(x => sb.AppendFormat("{0}", action(x)));
+
+            foreach (var lastFMObject in LastFMObject)
+            { 
+                sb.AppendFormat("{0}", action(lastFMObject));
+            }
 
             return sb.ToString();
         }
