@@ -9,6 +9,8 @@ using IF.Lastfm.Core.Objects;
 
 namespace LastFMSearch.LastFM_Search_Library
 {
+
+    //TODO: Work out where LibraryAPI etc should go, in here or elsewhere?
     public class Search
     {
 
@@ -40,6 +42,12 @@ namespace LastFMSearch.LastFM_Search_Library
         public async Task<IReadOnlyList<LastAlbum>> PerformTopAlbumSearch(string username)
         {
             var response = await userApi.GetTopAlbums(username, IF.Lastfm.Core.Api.Enums.LastStatsTimeSpan.Overall);
+            return response.Content;
+        }
+
+        public async Task<IReadOnlyList<LastTrack>> PerformTopTrackSearch(string username, string artist, string album, DateTimeOffset since)
+        {
+            var response = await libraryApi.GetTracks(username, artist, album, since);
             return response.Content;
         }
     }
