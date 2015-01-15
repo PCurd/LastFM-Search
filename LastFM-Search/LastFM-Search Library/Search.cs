@@ -16,8 +16,9 @@ namespace LastFMSearch.LastFM_Search_Library
         private string ApiSecret { get; set; }
         private ILastAuth Auth { get; set; }
         private IUserApi userApi { get; set; }
+        private ILibraryApi libraryApi { get; set; }
 
-        public Search(string ApiKey, string ApiSecret, IUserApi userApi = null)
+        public Search(string ApiKey, string ApiSecret, IUserApi userApi = null, ILibraryApi libraryApi = null)
         {
 
                 
@@ -29,6 +30,11 @@ namespace LastFMSearch.LastFM_Search_Library
                 this.userApi = new IF.Lastfm.Core.Api.UserApi(Auth);
             else
                 this.userApi = userApi;
+
+            if (libraryApi == null)
+                this.libraryApi = new IF.Lastfm.Core.Api.LibraryApi();
+            else
+                this.libraryApi = libraryApi;
         }
 
         public async Task<IReadOnlyList<LastAlbum>> PerformTopAlbumSearch(string username)
